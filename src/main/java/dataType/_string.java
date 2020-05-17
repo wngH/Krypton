@@ -157,18 +157,4 @@ public class _string {
 		}
 		return s;
 	}
-	
-	public void encrypt(String seedCode, String password) {
-		if (this.value.size() >= password.length()) {
-			_string KEY = new _string(password);
-			KEY.grow(this.value.size(), seedCode);
-			this.value = _string.combine(this,KEY).get();
-		}
-	}
-	
-	public void deEncrypt(String seedCode, String password) {
-		_string KEY = new _string(password);
-		KEY.grow(this.value.size(), seedCode);
-		this.value = _string.combine(this,KEY).get();
-	}
 }
