@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+## Krypton
 
-You can use the [editor on GitHub](https://github.com/wngH/Krypton/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Java based encrypter will help you in encrypting and decrypting your data in the simplest way!!
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+# How it work?
+Until now, this project just be able to encrypt a string to a string. 
 
-### Markdown
+To start, at the first you need a password and a seed to encrypt and make sure your password is less longer than your data (and to dencrypt you still need both of them):
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+```
+String target = "This is a secret message!";
+target = Encrypt.encrypt(target, "Your password", "Your seed");
+```
+To dencrypt, re-encrypt your target, it will reveal the data:
 
-```markdown
-Syntax highlighted code block
+```
+String target = "This is a secret message!";
+target = Encrypt.encrypt(target, "Your password", "Your seed");
 
-# Header 1
-## Header 2
-### Header 3
+// Dencrypt
+target = Encrypt.encrypt(target, "Your password", "Your seed");
+System.out.println(target);
 
-- Bulleted
-- List
+```
+It will be fine still if you want to protect it more carefully with more layers or encrypt data which only be able to access when all the members permit it.
 
-1. Numbered
-2. List
+```
+String target = "This is a secret message!";
+target = Encrypt.encrypt(target, "Password 0", "Seed 0");
+target = Encrypt.encrypt(target, "Password 1", "Seed 1");
+...
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+// Dencrypt
+target = Encrypt.encrypt(target, "Password 0", "Seed 0");
+target = Encrypt.encrypt(target, "Password 1", "Seed 1");
+...
+System.out.println(target);
+// This is a secret message!
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+And finally, that 's no matter if someone know the seed but if you let someone know the password, your data will be less private and the bad guys can still guessing that. The more close seed, the more clearly your data will be displayed. Be carefull!
 
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/wngH/Krypton/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```
+Happy hacking!
+// Below case is when someone got your password and approximately correct seed, then it will output this
+Happy'}7.dhE
+```
